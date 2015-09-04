@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>产品流量统计</title>
+	<link href="../../js/slider/slider.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../../js/jquery.js"></script>
+	<!-- 图表-->
+	<script type='text/javascript' src='../../js/highcharts/highcharts.js'></script>
+	<script type='text/javascript' src='../../js/highcharts/exporting.js'></script>
+	<script type='text/javascript' src='../../js/highcharts/highcharts-3d.js'></script>
+	<!-- 图表工具类-->
+	<script type='text/javascript' src='../../js/highcharts/higcharts-tools.js'></script>
+	<!-- 滑动条-->
+	<script type="text/javascript" src="../../js/slider/slider_extras.js"></script>
+	<script type="text/javascript">
+		$().ready(function() {
+			//var productName=$("#productName").val();
+	  		var ajaxUrl = '../../json/pfs/pfs.json';
+			$.ajax({	
+	   			type:"GET",
+	    		async:false,
+		   		url:ajaxUrl,
+		    	//data:{"productName":productName},
+		    	dataType:"json",
+		    	success:function(data){
+		    		rotationColumnChart('container',data.title,data.subtitle,'K',data.yAxisTitle,data.xAxis,data.series,'upSlider',0,50,15,'rightSlider',0,50,15);
+	   			}
+			});
+		});
+	</script>
+</head>
+<body>
+	<div id="container" style="margin-left: 10px;min-width:700px;height:400px"></div>
+	<div style="text-align:center;width:30%;margin-right: auto; margin-left: auto; ">
+		<table>
+			<tr id="upSlider_tr" style="display:none;">
+				<td>
+					上下角度：
+				</td>
+				<td>
+					<div id="upSlider" style="height:40px;margin-right: auto; margin-left: auto;">
+    				</div>
+				</td>
+			</tr>
+			<tr id="rightSlider_tr" style="display:none;">
+				<td>
+					左右角度： 
+				</td>
+				<td>
+					<div id="rightSlider" style="height:40px;margin-right: auto; margin-left: auto;display: inline;">
+    				</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
